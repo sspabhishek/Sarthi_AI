@@ -1,0 +1,151 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #272727;
+    color: #ffffff;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+.title {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 36px;
+    background: -webkit-linear-gradient(left, #ffffff, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: slideInDown 1s ease;
+}
+
+
+  .subtitle {
+      padding: 5px;
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 40px;
+    background: -webkit-linear-gradient(left, #ffffffd3, #ffffffd3);
+     -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    animation: slideInDown 1s ease;
+    
+
+  }
+
+  #prompt {
+    width: 98%;
+    height: 32px; /* Adjust the height as needed */
+    margin-top: 20px;
+    color: #ffffff;
+    padding: 10px; /* Reduce padding to maintain the same overall size */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #4b4b4b;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    position: relative; /* Needed for absolute positioning */
+    resize: none;
+    overflow-y:auto;
+}
+
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #4f4f4f;
+    color: #ffffff;
+    font-size: 16px;
+  }
+
+  .btn-generate {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-generate:hover {
+    background-color: #0056b3;
+  }
+
+  #output {
+    position: relative;
+  }
+
+  .copy-button {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+  }
+
+  .copy-message {
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: none;
+  }
+
+  #output {
+    width: 95%;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #4b4b4b;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    position: relative; /* Needed for absolute positioning */
+  }
+
+  #output p {
+    font-size: 18px;
+    animation: fadeIn 1s ease;
+  }
+
+  .generating-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 1s linear infinite; /* Add spinning animation */
+    display: none; /* Initially hide */
+  }
+
+  @keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }

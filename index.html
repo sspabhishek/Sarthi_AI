@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sarthi AI</title>
+  <link rel="shortcut icon" href="favicon.jpeg" type="image/x-icon">  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Sarthi</h1>
+    <h2 class="subtitle">Your own AI Assistant</h2>
+    <div class="form-group" >
+      <!-- <input id="prompt" rows="4" placeholder="Enter your prompt here"/> -->
+      <textarea id="prompt" rows="4" placeholder="Enter your prompt here"></textarea>
+    </div>
+    <button class="btn-generate" onclick="generateContent()">Generate</button>
+    <div id="output">
+      <!-- Generating Icon -->
+      <i class="fas fa-spinner fa-spin generating-icon" style="font-size: 20px; color: #fb4848;"></i>
+    </div>
+  </div>
+  <script src="/script.js"></script>
+
+  <script>
+    async function generateContent() {
+        // Check if the generating icon already exists in the document
+        let generatingIcon = document.querySelector('.generating-icon');
+        if (!generatingIcon) {
+            // If it doesn't exist, create it
+            generatingIcon = document.createElement('i');
+            generatingIcon.classList.add('fas', 'fa-spinner', 'fa-spin', 'generating-icon');
+            generatingIcon.style.fontSize = '20px';
+            generatingIcon.style.color = '#fb4848';
+            document.getElementById('output').appendChild(generatingIcon);
+        } else {
+            // If it exists, just show it
+            generatingIcon.style.display = 'block';
+        }
+
+        const prompt = document.getElementById("prompt").value;
+
+        const response = await fetch("/generate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ prompt })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            const formattedText = handleAIOutput(data.text);
+            document.getElementById("output").innerHTML = formattedText;
+
+            // Create a copy button
+            const copyButton = document.createElement('button');
+            copyButton.textContent = 'Copy';
+            copyButton.classList.add('copy-button');
+            copyButton.onclick = function() {
+                copyToClipboard(formattedText);
+                showCopyMessage();
+            };
+            document.getElementById('output').appendChild(copyButton);
+        } else {
+            document.getElementById("output").innerText = "Error: Failed to generate content";
+        }
+    }
+
+    function handleAIOutput(text) {
+        // Replace double asterisks with <strong> tags for bold text
+          text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+          // Replace triple backticks with <pre> tags for code blocks
+          text = text.replace(/```(.*?)```/gs, '<code>$1</code>');
+
+          text = text.replace(/"""(.*?)"""/gs, '<code>$1</code>');
+
+          // Replace language labels with appropriate formatting
+          text = text.replace(/(\w+)\s*```/g, '<p>$1</p><code>');
+
+          // Replace new line characters with <br> tags for line breaks
+          text = text.replace(/\n/g, '<br>');
+
+         return text;
+    }
+
+    // Function to copy text to clipboard
+    function copyToClipboard(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+    }
+
+    
+
+    // Function to handle key press event
+    document.getElementById("prompt").addEventListener("keydown", function(event) {
+        // Check if the key pressed is Enter key (key code 13) and Shift key is also pressed
+        if (event.key === "Enter" && event.shiftKey) {
+            // Prevent default behavior of Enter key (which is usually line break in textareas)
+            event.preventDefault();
+            // Append a newline character to the prompt textarea
+            this.value += "\n";
+        } else if (event.key === "Enter") {
+            // Prevent default behavior of Enter key (which is usually form submission in textareas)
+            event.preventDefault();
+            // Call generateContent function when Enter key is pressed
+            generateContent();
+        }
+    });
+
+</script>
+</body>
+</html>
