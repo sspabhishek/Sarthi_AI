@@ -3,8 +3,10 @@ body {
   background-color: #272727;
   color: #ffffff;
   padding: 20px;
-  background-image: url('./universe.gif');
-  background-size: cover;
+  background-color: #111927;
+  background-image: radial-gradient(at 47% 33%,hsl(162,77%,40%) 0,transparent 59%),radial-gradient(at 82% 65%,hsl(218,39%,11%) 0,transparent 55%);
+ /* background-image: url('./universe.gif');
+  background-size: cover; */
   background-repeat: no-repeat;
   display: flex;
   justify-content: center; /* Align content to the top */
@@ -22,23 +24,27 @@ body {
 
 
 .title {
+  Font-family: Baskerville, Baskerville Old Face, Garamond, Times New Roman, serif;
   text-align: center;
   margin-bottom: 10px;
   font-size: 36px;
-  background: -webkit-linear-gradient(left, #ffffff, #ffffff);
+  color: rgb(255, 255, 255);
+  /*background: -webkit-linear-gradient(left, #ffffff, #ffffff);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent; */
   animation: slideInDown 1s ease;
 }
 
 .subtitle {
+  font-family: 'Montserrat', sans-serif;
   padding: 5px;
   text-align: center;
   font-size: 14px;
   margin-bottom: 40px;
-  background: -webkit-linear-gradient(left, #ffffffd3, #ffffffd3);
+
+/*  background: -webkit-linear-gradient(left, #ffffffd3, #ffffffd3);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; 
+  -webkit-text-fill-color: transparent; */
   animation: slideInDown 1s ease;
 }
 
@@ -51,6 +57,8 @@ body {
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: #4b4b4b;
+  /* Other CSS properties remain unchanged */
+  background-color: rgba(75, 75, 75, 0.5); /* Adjust the alpha value (last parameter) to control the transparency */
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
   position: relative;
   resize: none;
@@ -73,9 +81,9 @@ body {
 
 .btn-generate {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #0800ffa3;
   color: #fff;
-  border: none;
+  border: 1px solid transparent; /* Set a transparent border initially */
   border-radius: 50px;
   cursor: pointer;
   display: block;
@@ -84,7 +92,9 @@ body {
 }
 
 .btn-generate:hover {
-  background-color: #0056b3;
+  background-color: #1500ff;
+  border: #ffffffb6 solid 1px;
+  position:-webkit-sticky;
 }
 
 #output {
@@ -94,6 +104,8 @@ body {
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: #4b4b4b;
+  /* Other CSS properties remain unchanged */
+  background-color: rgba(75, 75, 75, 0.5); /* Adjust the alpha value (last parameter) to control the transparency */
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
   position: relative;
 }
@@ -113,10 +125,22 @@ body {
 }
 
 .copy-button {
+  padding: 8px 16px;
   position: absolute;
   bottom: 5px;
   right: 5px;
+  background-color: rgba(255, 255, 255, 0.3); /* Adjust the alpha value (last parameter) to control the transparency */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
+
+.copy-button:hover {
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust the alpha value (last parameter) to control the transparency */
+}
+
 @keyframes spin {
   0% { transform: translate(-50%, -50%) rotate(0deg); }
   100% { transform: translate(-50%, -50%) rotate(360deg); }
