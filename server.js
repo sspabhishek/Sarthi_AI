@@ -5,7 +5,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const app = express();
 const port = 3000;
 
-API_KEY = "AIzaSyCOObpkas_YlD1zxclGAwA2070JYWfqlA4";
+API_KEY = "google Gemini API";
 
 // Access your API key as an environment variable (see "Set up your API key" above)
 const genAI = new GoogleGenerativeAI(API_KEY);
