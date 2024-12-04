@@ -1,14 +1,12 @@
 const express = require("express");
 const path = require('path');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-
+require('dotenv').config();
 const app = express();
 const port = 3000;
 
-API_KEY = "AIzaSyCOObpkas_YlD1zxclGAwA2070JYWfqlA4";
-
 // Access your API key as an environment variable (see "Set up your API key" above)
-const genAI = new GoogleGenerativeAI(API_KEY);
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 app.use(express.json());
 
@@ -19,7 +17,7 @@ app.post("/generate", async (req, res) => {
   console.log(prompt);
   try {
     // For text-only input, use the gemini-pro model
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
